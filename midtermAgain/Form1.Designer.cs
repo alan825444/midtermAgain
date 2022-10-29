@@ -42,6 +42,7 @@
             this.btn_regist.TabIndex = 0;
             this.btn_regist.Text = "註冊";
             this.btn_regist.UseVisualStyleBackColor = true;
+            this.btn_regist.Click += new System.EventHandler(this.btn_regist_Click);
             // 
             // button1
             // 

@@ -30,21 +30,28 @@ namespace midtermAgain
 
         private void btn_test_Click(object sender, EventArgs e)
         {
-            //SqlConnection con = new SqlConnection(dbConStr);
-            //con.Open();
-            //SqlCommand cmd = new SqlCommand("select * from table", con);
-            //SqlDataReader reader = cmd.ExecuteReader();
-            //con.Close();
+            Dictionary<string, string> table = new Dictionary<string, string>();
+            table.Add("A", "T_member");
+            table.Add("B", "T_test");
             selctItem item = new selctItem()
             {
-                tableName = "T_member",
-                orderBy = "ID"
+                tableName = table,
+                orderBy = "A.ID",
+                colloumns = new List<string> { "A.*"},
+                conditions = "A.ID = B.FK_member"
             };
-            item.tableName = "T_member";
             sqlFactory sqlFactory = new sqlFactory();
             List<Dictionary<string,string>> temp = sqlFactory.SelectTable(item);
-            Console.WriteLine(sqlFactory.SelectTable(item)[1]["Password"]);
+            Console.WriteLine(sqlFactory.SelectTable(item)[0]["Password"]);
 
+        }
+
+        private void btn_regist_Click(object sender, EventArgs e)
+        {
+            register register = new register();
+            this.Visible = false;
+            register.ShowDialog();
+            
         }
     }
 }

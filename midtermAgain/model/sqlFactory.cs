@@ -13,6 +13,7 @@ namespace midtermAgain
     internal class sqlFactory
     {
         public string dbConStr = ConfigurationManager.ConnectionStrings["midterm"].ToString();
+
         public SqlConnection connection()
         {
             SqlConnection con = new SqlConnection(dbConStr);
@@ -24,8 +25,9 @@ namespace midtermAgain
         public List<Dictionary<string, string>> SelectTable(selctItem item)
         {
             SqlConnection con = connection();
+            //組成SQL字串，此處沒有特別使用parameter是因為主要為程式內自己使用的查詢，不會讓使用者有機會進行sql injection
             string sqlStr = "SELECT ";
-            if(item.colloumns.Count != 0 && item.colloumns != null)
+            if(item.colloumns.Count != 0)
             {
                 foreach (var colloumn in item.colloumns)
                 {
@@ -38,7 +40,12 @@ namespace midtermAgain
             {
                 sqlStr += "* FROM ";
             }
-            sqlStr += $"{item.tableName} ";
+            foreach ( var table in item.tableName)
+            {
+                sqlStr += $"{table.Value} as {table.Key} ,";
+            }
+
+            sqlStr = sqlStr.Trim(',');
 
             if(item.conditions != "")
             {
@@ -66,7 +73,7 @@ namespace midtermAgain
             while (dr.Read())
             {
                 Dictionary<string, string> temp = new Dictionary<string, string>();
-                for (int i = 0; i <= dr.FieldCount-1; i++)
+                for (int i = 0; i < dr.FieldCount-1; i++)
                 {
                     temp.Add(dr.GetName(i).ToString(),dr.GetValue(i).ToString());
                 }
@@ -77,6 +84,14 @@ namespace midtermAgain
             con.Close();
 
             return result;
+        }
+        public void sqlInsert(string[] tableName)
+        {
+            SqlConnection con = connection();
+            con.Open();
+            string sqlStr = $"INSTER INTO {tableName}";
+
+
         }
     }
 }

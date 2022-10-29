@@ -8,7 +8,7 @@ namespace midtermAgain.model
 {
     internal class selctItem
     {
-        public string tableName { get; set; }
+        public Dictionary<string,string> tableName { get; set; }
         public List<string> colloumns = new List<string>();
         public string conditions = "";
         public string groupby = ""; 
