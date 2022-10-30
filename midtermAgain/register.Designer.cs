@@ -155,10 +155,12 @@
             // 
             // dtp_birth
             // 
+            this.dtp_birth.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtp_birth.Location = new System.Drawing.Point(118, 318);
             this.dtp_birth.Name = "dtp_birth";
             this.dtp_birth.Size = new System.Drawing.Size(128, 22);
             this.dtp_birth.TabIndex = 10;
+            this.dtp_birth.Value = new System.DateTime(2022, 10, 30, 13, 1, 1, 0);
             // 
             // label6
             // 

@@ -85,13 +85,33 @@ namespace midtermAgain
 
             return result;
         }
-        public void sqlInsert(string[] tableName)
+        public bool sqlInsert(string tableName, Dictionary<string,string> datas)
         {
             SqlConnection con = connection();
-            con.Open();
-            string sqlStr = $"INSTER INTO {tableName}";
+            string sqlStr = $"INSERT INTO {tableName} VALUES (";
+            foreach (var data in datas)
+            {
+                sqlStr += $"@{data.Key},";
+            }
+            sqlStr = sqlStr.Trim(',');
+            sqlStr += ")";
+            SqlCommand cmd = new SqlCommand(sqlStr, con);
+            foreach (var data in datas)
+            {
+                cmd.Parameters.AddWithValue($"@{data.Key}",data.Value);
+            }
+            int q = cmd.ExecuteNonQuery();
+            con.Close();
+            if (q > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-
+            
         }
     }
 }

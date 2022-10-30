@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace midtermAgain.model
 {
-    internal class insetItem
+    internal class insertItem
     {
-        public string[] tableName { get; set; }
-        public object data { get; set; }
+        public string tableName { get; set; }
+        public class List<T> { };
     }
 }
