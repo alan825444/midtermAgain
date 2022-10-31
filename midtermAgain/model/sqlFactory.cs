@@ -68,12 +68,13 @@ namespace midtermAgain
             }
             List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
             
+            
             SqlCommand cmd = new SqlCommand(sqlStr,con);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 Dictionary<string, string> temp = new Dictionary<string, string>();
-                for (int i = 0; i < dr.FieldCount-1; i++)
+                for (int i = 0; i <= dr.FieldCount-1; i++)
                 {
                     temp.Add(dr.GetName(i).ToString(),dr.GetValue(i).ToString());
                 }

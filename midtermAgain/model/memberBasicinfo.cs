@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace midtermAgain.model
 {
-    internal class globalValue
+    internal class memberBasicinfo
     {
-        public static memberBasicinfo memberBasicinfo { get; set; } 
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Permission { get; set; }
     }
 }

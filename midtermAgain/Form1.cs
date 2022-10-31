@@ -70,5 +70,51 @@ namespace midtermAgain
             register.ShowDialog();
             
         }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            string msg = "";
+            Dictionary<string, string> table = new Dictionary<string, string>();
+            table.Add("A", "T_member");
+            selctItem item = new selctItem()
+            {
+                tableName = table,
+                colloumns = new List<string> { "A.ID","A.Account", "A.Verification", "A.Permission","A.Name" },
+                conditions = $"A.Account ='{txt_account.Text}' AND A.Password = '{txt_pwd.Text}'"
+            };
+            var q = new sqlFactory().SelectTable(item);
+            if (q.Count() == 1)
+            {
+                if (q[0]["Verification"] != "0")
+                {
+                    memberBasicinfo memberBasicinfo = new memberBasicinfo()
+                    {
+                        ID = Convert.ToInt16(q[0]["ID"]),
+                        Name = q[0]["Name"],
+                        Permission = q[0]["Permission"]
+                    };
+                    globalValue.memberBasicinfo = memberBasicinfo;
+                    msg = $"{globalValue.memberBasicinfo.Name} 您好!\n" +
+                        $"請按下確認至操作介面";
+                    MessageBox.Show(msg);
+                    controlCenter fr = new controlCenter();
+                    fr.Show();
+                    this.Hide();
+
+                }
+                else
+                {
+                    msg = $"請聯絡管理員開通帳號權限";
+                    MessageBox.Show(msg);
+                }
+            }
+            else
+            {
+                msg = "帳號密碼輸入錯誤";
+                MessageBox.Show(msg);
+                txt_account.Clear();
+                txt_pwd.Clear();
+            }
+        }
     }
 }

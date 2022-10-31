@@ -47,6 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accountMng.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="accountMng.Designer.cs">
+      <DependentUpon>accountMng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controlCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="controlCenter.Designer.cs">
+      <DependentUpon>controlCenter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +67,7 @@
     </Compile>
     <Compile Include="model\globalValue.cs" />
     <Compile Include="model\insetItem.cs" />
+    <Compile Include="model\memberBasicinfo.cs" />
     <Compile Include="model\registerData.cs" />
     <Compile Include="model\selctItem.cs" />
     <Compile Include="Program.cs" />
@@ -66,6 +79,12 @@
     <Compile Include="register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="accountMng.resx">
+      <DependentUpon>accountMng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controlCenter.resx">
+      <DependentUpon>controlCenter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
