@@ -40,6 +40,23 @@ namespace midtermAgain
             dataLoad();
         }
 
+        private void btn_verify_Click(object sender, EventArgs e)
+        {
+            sqlFactory sqlFactory = new sqlFactory();
+            var ID = dgv_info.Rows[dgv_info.CurrentCell.RowIndex].Cells[0].Value;
+            Dictionary<string,string> data = new Dictionary<string,string>();
+            data.Add("Verification","1");
+            if (sqlFactory.sqlUpdate("T_member", data, $"ID= {ID}"))
+            {
+                MessageBox.Show("帳號認證成功");
+            }
+            else
+            {
+                MessageBox.Show("帳號認證失敗");
+            };
+            dataLoad();
+        }
+
         private void dataLoad()
         {
             sqlFactory sqlFactory = new sqlFactory();
@@ -117,6 +134,6 @@ namespace midtermAgain
             cb_verification.Items.Add("已認證");
         }
 
-        
+
     }
 }

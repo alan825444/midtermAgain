@@ -121,6 +121,7 @@
             this.btn_verify.TabIndex = 8;
             this.btn_verify.Text = "驗證帳號";
             this.btn_verify.UseVisualStyleBackColor = true;
+            this.btn_verify.Click += new System.EventHandler(this.btn_verify_Click);
             // 
             // accountMng
             // 

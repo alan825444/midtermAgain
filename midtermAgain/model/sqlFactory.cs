@@ -110,9 +110,37 @@ namespace midtermAgain
             else
             {
                 return false;
-            }
+            }  
+        }
 
+        public bool sqlUpdate(string table, Dictionary<string,string> datas, string condition)
+        {
+            SqlConnection con = connection();
+            string sqlStr = $"UPDATE {table} SET";
+            foreach (var data in datas)
+            {
+                sqlStr += $" {data.Key} = @{data.Key},";
+            }
+            sqlStr = sqlStr.Trim(',');
+            sqlStr += $" WHERE {condition}";
+            SqlCommand cmd = new SqlCommand(sqlStr, con);
+            foreach (var data in datas)
+            {
+                cmd.Parameters.AddWithValue($"@{data.Key}",data.Value);
+            }
+            var q = cmd.ExecuteNonQuery();
+            if(q > 0)
+            {
+                con.Close();
+                return true;
+            }
+            else
+            {
+                con.Close();
+                return false;
+            }
             
+
         }
     }
 }
